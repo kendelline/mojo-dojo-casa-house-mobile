@@ -13,7 +13,7 @@
 - **Column**: Menyusun widget secara vertikal di layar.
 - **ElevatedButton**: Tombol interaktif yang dapat ditekan dan menampilkan aksi tertentu, dalam hal ini menampilkan pesan di Snackbar.
 - **Icon**: Menampilkan ikon di samping teks pada tombol.
-- **Text**: Menampilkan teks statis pada layar.
+- **Text**: Menampilkan teks statis pada gilayar.
 - **SnackBar**: Menampilkan pesan singkat di bagian bawah layar sebagai respons terhadap interaksi pengguna.
 - **ScaffoldMessenger**: Digunakan untuk menampilkan Snackbar di dalam `Scaffold`.
 
@@ -27,7 +27,7 @@
 - **const**: Digunakan untuk mendefinisikan nilai konstan yang ditentukan pada saat kompilasi, dan tidak akan pernah berubah. Biasanya untuk objek yang tidak berubah.
 - **final**: Digunakan untuk nilai yang tetap setelah pertama kali diinisialisasi, tetapi inisialisasi bisa dilakukan saat runtime.
 
-# Implementasi Checklist Flutter
+## Implementasi Checklist Flutter
 1. Membuat Proyek Flutter Baru
 Buka terminal atau command prompt dan buat proyek Flutter baru dengan nama `mojo_dojo_casa_house`:
 
