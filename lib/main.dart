@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mojo_dojo_casa_house/menu.dart';
+import 'package:mojo_dojo_casa_house/screens/menu.dart';
+import 'package:mojo_dojo_casa_house/widgets/left_drawer.dart';
+import 'package:mojo_dojo_casa_house/screens/productentry_form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,9 +31,13 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
+        fontFamily: 'Poppins',
         colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.pink,
-        ).copyWith(secondary: Colors.pinkAccent[200]),
+          primarySwatch: Colors.pink,
+        ).copyWith(
+          secondary: const Color.fromARGB(255, 243, 75, 131),
+          surface: const Color.fromARGB(255, 255, 243, 247),
+        ),
         useMaterial3: true,
       ),
       home: MyHomePage(),
