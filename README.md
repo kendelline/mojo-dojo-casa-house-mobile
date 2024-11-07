@@ -20,7 +20,6 @@
 - **SnackBar**: Menampilkan pesan singkat di bagian bawah layar sebagai respons terhadap interaksi pengguna.
 - **ScaffoldMessenger**: Digunakan untuk menampilkan Snackbar di dalam `Scaffold`.
 
-
 ### Fungsi `setState()`
 
 - **setState()**: Digunakan di dalam Stateful Widget untuk memberitahu Flutter bahwa ada perubahan pada state, sehingga widget perlu dirender ulang. Variabel yang berada di dalam state (contoh: `int counter`, `String text`) akan diperbarui melalui `setState()`.
@@ -123,4 +122,25 @@ Implementasi Pengaturan Tema:
     );
   }
 ```
+
+### Penanganan Navigasi dalam Aplikasi Flutter dengan Banyak Halaman
+Navigasi dalam aplikasi Flutter dengan banyak halaman dapat dilakukan menggunakan `Navigator` dan `MaterialPageRoute`. Pada aplikasi ini, saya menggunakan metode `Navigator.push` untuk membuka halaman baru dan `Navigator.pop` untuk kembali ke halaman sebelumnya.
+
+Implementasi Navigasi Antar Halaman:
+```dart
+Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => ProductEntryFormPage()),
+);
+```
+Kode di atas akan memuat halaman `ProductEntryFormPage` sebagai halaman baru yang ditumpuk di atas halaman saat ini. 
+
+### Implementasi Checklist Flutter
+1. Membuat file baru bernama `productentry_form.dart` di dalam folder `screens`. Di dalam file ini, saya memiliki halaman form untuk menambah item baru dengan elemen input _name_, _amount_, dan _description_.
+2. Menambahkan tombol `Save` menggunakan `ElevatedButton` pada file `productentry_form.dart`. Jika input tidak valid, akan muncul sebuah pop-up dengan `AlertDialog`.
+3. Melakukan validasi pada setiap elemen input sesuai dengan ketentuan pada `productentry_form.dart` juga.
+4. Pada `menu.dart`, menambahkan navigasi dari tombol `Tambah Item` dengan `Navigator.push` di halaman utama yang jika di klik akan membawa tampilan ke halaman form tambah item.
+5. Membuat drawer dengan dua opsi yaitu Halaman Utama (`menu.dart`) dan Tambah Item (`productentry_form.dart`).
+6. Menambahkan font Poppins ke dalam `pubspec.yaml` dan melakukan konfigurasi pada `main.dart` untuk mengatur tema aplikasi dengan font Poppins sebagai font default.
+
 </details>
