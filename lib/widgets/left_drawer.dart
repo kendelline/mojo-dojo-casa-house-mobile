@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mojo_dojo_casa_house/screens/menu.dart';
 import 'package:mojo_dojo_casa_house/screens/productentry_form.dart';
+import 'package:mojo_dojo_casa_house/screens/list_productentry.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -57,10 +58,21 @@ class LeftDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProductEntryFormPage(),
+                  builder: (context) => const ProductEntryFormPage(),
                 ),
               );
             },
+          ),
+          ListTile(
+              leading: const Icon(Icons.list_alt_rounded),
+              title: const Text('Daftar Produk'),
+              onTap: () {
+                  // Route menu ke halaman mood
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ProductEntryPage()),
+                  );
+              },
           ),
         ],
       ),

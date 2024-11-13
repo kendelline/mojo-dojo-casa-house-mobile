@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mojo_dojo_casa_house/widgets/product_card.dart';
 import 'package:mojo_dojo_casa_house/widgets/left_drawer.dart';
-import 'package:mojo_dojo_casa_house/screens/productentry_form.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
