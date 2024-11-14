@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mojo_dojo_casa_house/screens/menu.dart';
+import 'package:mojo_dojo_casa_house/screens/login.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +10,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return Provider(
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
           ),
           useMaterial3: true,
         ),
-        home: MyHomePage(),
+        home: const LoginPage(),
       ),
     );
   }

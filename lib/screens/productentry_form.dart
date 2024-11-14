@@ -15,17 +15,20 @@ class ProductEntryFormPage extends StatefulWidget {
 class _ProductEntryFormPageState extends State<ProductEntryFormPage> {
   final _formKey = GlobalKey<FormState>();
   String _product = "";
-  int _amount = 0;
+  int _price = 0;
   String _description = "";
+  int _quantity = 0;
 
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Your Add Product Form',
+        title: const Text(
+        'Product Entry List',
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
           ),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -73,8 +76,8 @@ class _ProductEntryFormPageState extends State<ProductEntryFormPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Amount",
-                    labelText: "Amount",
+                    hintText: "Price",
+                    labelText: "Price",
                     fillColor: Colors.white,
                     filled: true,
                     border: OutlineInputBorder(
@@ -84,19 +87,52 @@ class _ProductEntryFormPageState extends State<ProductEntryFormPage> {
                   keyboardType: TextInputType.number,
                   onChanged: (String? value) {
                     setState(() {
-                      _amount = int.tryParse(value!) ?? 0;
+                      _price = int.tryParse(value!) ?? 0;
                     });
                   },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      return "Amount tidak boleh kosong!";
+                      return "Price tidak boleh kosong!";
                     }
                     final parsedValue = int.tryParse(value);
                     if (parsedValue == null) {
-                      return "Amount harus berupa angka!";
+                      return "Price harus berupa angka!";
                     }
                     if (parsedValue <= 0) {
-                      return "Amount harus lebih besar dari 0!";
+                      return "Price harus lebih besar dari 0!";
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Quantity",
+                    labelText: "Quantity",
+                    fillColor: Colors.white,
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
+                  onChanged: (String? value) {
+                    setState(() {
+                      _quantity = int.tryParse(value!) ?? 0;
+                    });
+                  },
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return "Quantity tidak boleh kosong!";
+                    }
+                    final parsedValue = int.tryParse(value);
+                    if (parsedValue == null) {
+                      return "Quantity harus berupa angka!";
+                    }
+                    if (parsedValue <= 0) {
+                      return "Quantity harus lebih besar dari 0!";
                     }
                     return null;
                   },
@@ -150,8 +186,9 @@ class _ProductEntryFormPageState extends State<ProductEntryFormPage> {
                                 "http://127.0.0.1:8000/create-flutter/",
                                 jsonEncode(<String, String>{
                                     'product': _product,
-                                    'amount': _amount.toString(),
+                                    'price': _price.toString(),
                                     'description': _description,
+                                    'quantity':_quantity.toString(),
                                 }),
                             );
                             if (context.mounted) {

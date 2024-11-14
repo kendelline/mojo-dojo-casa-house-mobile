@@ -33,54 +33,80 @@ class _ProductEntryPageState extends State<ProductEntryPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product Entry List'),
+        title: const Text(
+        'Product Entry List',
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        )
+      ),
+      backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       drawer: const LeftDrawer(),
       body: FutureBuilder(
         future: fetchProduct(request),
         builder: (context, AsyncSnapshot snapshot) {
-          if (snapshot.data == null) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
+          } else if (!snapshot.hasData || snapshot.data.isEmpty) {
+            return const Center(
+              child: Text(
+                'Belum ada data produk pada Mojo Dojo Casa House.',
+                style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 216, 89, 186)),
+              ),
+            );
           } else {
-            if (!snapshot.hasData) {
-              return const Column(
-                children: [
-                  Text(
-                    'Belum ada data produk pada Mojo Dojo Casa House.',
-                    style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 216, 89, 186)),
-                  ),
-                  SizedBox(height: 8),
-                ],
-              );
-            } else {
-              return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (_, index) => Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  padding: const EdgeInsets.all(20.0),
+            return ListView.builder(
+              itemCount: snapshot.data.length,
+              itemBuilder: (_, index) => Card(
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "${snapshot.data![index].fields.Product}",
+                        snapshot.data[index].fields.name,
                         style: const TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 20.0,
                           fontWeight: FontWeight.bold,
+                          color: Colors.black87,
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      Text("${snapshot.data![index].fields.feelings}"),
-                      const SizedBox(height: 10),
-                      Text("${snapshot.data![index].fields.ProductIntensity}"),
-                      const SizedBox(height: 10),
-                      Text("${snapshot.data![index].fields.time}")
+                      const SizedBox(height: 8),
+                      Text(
+                        "Rp ${snapshot.data[index].fields.price}",
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.green,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        "Quantity: ${snapshot.data[index].fields.quantity}",
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.blueGrey,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        snapshot.data[index].fields.description,
+                        style: const TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.black54,
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              );
-            }
+              ),
+            );
           }
         },
       ),
