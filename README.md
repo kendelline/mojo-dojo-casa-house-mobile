@@ -142,5 +142,51 @@ Kode di atas akan memuat halaman `ProductEntryFormPage` sebagai halaman baru yan
 4. Pada `menu.dart`, menambahkan navigasi dari tombol `Tambah Item` dengan `Navigator.push` di halaman utama yang jika di klik akan membawa tampilan ke halaman form tambah item.
 5. Membuat drawer dengan dua opsi yaitu Halaman Utama (`menu.dart`) dan Tambah Item (`productentry_form.dart`).
 6. Menambahkan font Poppins ke dalam `pubspec.yaml` dan melakukan konfigurasi pada `main.dart` untuk mengatur tema aplikasi dengan font Poppins sebagai font default.
+</details>
 
+## Tugas 9
+<details>
+
+### Alasan Pentingnya Model dalam Pengambilan dan Pengiriman Data JSON
+Model diperlukan untuk mendefinisikan struktur data JSON yang dikirim dan diterima, mempermudah pemetaan data, validasi, dan mencegah kesalahan, sehingga aplikasi lebih stabil dan mudah dikelola.
+
+Jika tidak membuat model terlebih dahulu, aplikasi bisa error karena data yang diterima tidak sesuai dengan yang diharapkan, atau kesalahan saat mengubah data JSON menjadi objek di Flutter.
+
+### Fungsi dari Library HTTP
+Library http pada Flutter digunakan untuk melakukan request HTTP seperti GET, POST, PUT, DELETE, dll. Ini memungkinkan aplikasi untuk berkomunikasi dengan server (misalnya, Django) melalui API. Fungsi utamanya adalah untuk mengirimkan data ke server dan menerima data dari server, baik dalam format JSON, XML, atau lainnya.
+
+Dalam tugas ini, library http memungkinkan aplikasi Flutter untuk berinteraksi dengan backend, seperti mengirim data login, register, atau data produk ke Django dan menerima responsnya.
+
+### Fungsi dari CookieRequest
+CookieRequest digunakan untuk menyimpan token autentikasi yang diperlukan untuk mengautentikasi setiap permintaan HTTP setelah login. CookieRequest juga perlu dibagikan ke seluruh aplikasi agar token autentikasi bisa digunakan di semua permintaan HTTP ke server.
+
+### Mekanisme Pengiriman Data pada Flutter
+1. Input Data: 
+- Pengguna memasukkan data melalui form (misalnya, form login atau form produk).
+    
+2. Pengiriman Data: 
+- Data yang dimasukkan oleh pengguna dikirimkan melalui HTTP request menggunakan library http ke server Django.
+
+3. Pemrosesan di Server: 
+- Server Django memproses data (misalnya, autentikasi login atau penyimpanan produk) dan mengirimkan respons kembali berupa data JSON atau status.
+
+4. Penerimaan dan Tampilan di Flutter: 
+- Aplikasi Flutter menerima respons JSON dari server, kemudian mendeserialisasi data tersebut ke dalam objek model dan menampilkannya di UI menggunakan widget Flutter.
+
+### Mekanisme Autentikasi dari _login_, _register_, hingga _Logout_
+1. Login: Pengguna kirim data login (username, password) ke server, dan jika valid, server kirimkan token autentikasi.
+2. Register: Pengguna kirim data pendaftaran, server proses dan kirimkan respons sukses atau token.
+3. Logout: Pengguna klik logout, aplikasi kirim request untuk menghapus token dan menandai pengguna sebagai logout.
+
+### Implementasi Checklist Flutter
+1. Membuat app `authentication ` pada proyek Django awal kita dan menambahkan _login_, _register_, dan _logout_ pada `authentication/views.py`. Tidak lupa merouting url nya juga pada `authentication/urls.py`.
+2. Menambahkan routing url `authentication` pada `mojo_dojo_casa_house/urls.py`.
+    ```py
+    ...
+    path('auth/', include('authentication.urls')),
+    ```
+3. Meng-install `authentication` dan `corsheader` pada `mojo_dojo_casa_house/settings.py`.
+4. Menambahkan `create_product_flutter` pada `mojo-dojo-casa-house/main/views.py`
+4. Membuat model di Flutter untuk data yang akan dikirimkan dan diterima, seperti model untuk _login_, _product_, atau _user_. Dapat dilihat di direktori `.../lib`
+5. Mengelola alur UI di Flutter untuk menampilkan halaman _login_, _register_, menu utama, dll berdasarkan status autentikasi.
 </details>
